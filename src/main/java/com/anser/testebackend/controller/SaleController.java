@@ -31,7 +31,7 @@ public class SaleController{
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 	@Autowired
-    private Receiver receiver;
+    	private Receiver receiver;
 
 	
 	@PostMapping("/")
