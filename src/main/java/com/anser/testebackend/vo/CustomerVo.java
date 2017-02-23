@@ -1,8 +1,17 @@
 package com.anser.testebackend.vo;
 
-public class CustomerVo {
+import javax.validation.constraints.NotNull;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+@EntityScan
+public class CustomerVo{
+	
+
 	private Integer id;
+	@NotNull (message = "Name não pode ser nulo")
 	private String name;
+	@NotNull (message = "Age não pode ser nulo")
 	private Integer age;
 	
 	public CustomerVo() {
@@ -39,5 +48,9 @@ public class CustomerVo {
 		this.age = age;
 	}
 	
+	@Override
+	public String toString() {
+		return "CustomerVo [id= " + id + ", name= " + name + ", age= " + age + "]";
+	}
 	
 }

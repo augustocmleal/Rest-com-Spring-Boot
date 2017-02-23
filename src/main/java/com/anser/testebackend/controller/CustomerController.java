@@ -5,45 +5,47 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.validation.annotation.Validated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.anser.testebackend.dao.daoImpl.CustomerDaoImpl;
 import com.anser.testebackend.vo.CustomerVo;
 
 @RestController
-@Validated
-@RequestMapping(path = "/customer")
+@RequestMapping("/customer")
 public class CustomerController {
 	
-	private CustomerDaoImpl customerDaoImpl = new CustomerDaoImpl();
+	@Autowired
+	private CustomerDaoImpl customerDaoImpl;
 	
-	@RequestMapping(path = "/inserir/{name}/{age}", method = RequestMethod.GET)
-	public void inserir(@Valid @PathVariable String name, @Valid @PathVariable Integer age) throws SQLException{	
-		CustomerVo customer = new CustomerVo(null, name, age);
+	@PostMapping("/")
+	public void inserir(@Valid @RequestBody CustomerVo customer) throws SQLException{	
 		customerDaoImpl.inserir(customer);
 	}
 	
-	@RequestMapping(path = "/alterar/{name}/{age}/{id}", method = RequestMethod.GET)
-	public void alterar(@Valid @PathVariable String name, @Valid @PathVariable Integer age, @Valid @PathVariable Integer id) throws SQLException{	
-		CustomerVo customer = new CustomerVo(id, name, age);
+	@PostMapping(value = "/{id}")
+	public void alterar(@PathVariable Integer id, @Valid @RequestBody CustomerVo customer) throws SQLException{	
+		if(customer != null){
+			customer.setId(id);
+		}
 		customerDaoImpl.alterar(customer);
 	}
 	
-	@RequestMapping(path = "/listar", method = RequestMethod.GET)
+	@RequestMapping("/")
 	public List<CustomerVo> listar() throws SQLException{	
 		return customerDaoImpl.listar();
 	}
 	
-	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}")
 	public CustomerVo carregar(@PathVariable Integer id) throws SQLException{	
 		return customerDaoImpl.carregar(id);
 	}
 	
-	@RequestMapping(path = "/excluir/{id}", method = {RequestMethod.POST, RequestMethod.GET})
+	@PostMapping(path = "/excluir/{id}")
 	public void excluir(@PathVariable Integer id) throws SQLException{	
 			customerDaoImpl.excluir(id);
 	}

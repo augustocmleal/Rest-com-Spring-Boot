@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: testebackend
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: augus
+Built-By: augustomagalhaes
 Implementation-Vendor-Id: com.anser
-Build-Jdk: 1.8.0_91
+Build-Jdk: 1.8.0_60
 Implementation-URL: http://projects.spring.io/spring-boot/testebackend
  /
 Created-By: Maven Integration for Eclipse

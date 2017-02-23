@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.anser.testebackend.dao.CustomerDao;
 import com.anser.testebackend.factory.ConnectionFactory;
 import com.anser.testebackend.vo.CustomerVo;
 
-
+@Repository
 public class CustomerDaoImpl extends ConnectionFactory implements CustomerDao{
 
 	@Override

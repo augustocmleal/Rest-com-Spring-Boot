@@ -2,18 +2,36 @@ package com.anser.testebackend.vo;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+@EntityScan
 public class SaleVo {
+	
 	private Integer id;
+	@NotNull (message = "Customer não pode ser nulo")
+	@Autowired
 	private CustomerVo customer;
+	@NotNull (message = "Date não pode ser nulo")
 	private Date date;
+	@NotNull (message = "Amount não pode ser nulo")
 	private Double amount;
-	private Integer externalId;
+	private String externalId;
 	
 	public SaleVo() {
 		// TODO Auto-generated constructor stub
 	}
+	public SaleVo(Integer id, CustomerVo customer, Date date, Double amount) {
+		super();
+		this.id = id;
+		this.customer = customer;
+		this.date = date;
+		this.amount = amount;
+	}
 
-	public SaleVo(Integer id, CustomerVo customer, Date date, Double amount, Integer externalId) {
+	public SaleVo(Integer id, CustomerVo customer, Date date, Double amount, String externalId) {
 		super();
 		this.id = id;
 		this.customer = customer;
@@ -54,13 +72,18 @@ public class SaleVo {
 		this.amount = amount;
 	}
 
-	public Integer getExternalId() {
+	public String getExternalId() {
 		return externalId;
 	}
 
-	public void setExternalId(Integer externalId) {
+	public void setExternalId(String externalId) {
 		this.externalId = externalId;
 	}
 	
+	@Override
+	public String toString() {
+		return "SaleVo [id= " + id + ", customer= " + customer + ", date= " + date + ", amount= " + amount + ", externalId= "
+				+ externalId + "]";
+	}
 	
 }
